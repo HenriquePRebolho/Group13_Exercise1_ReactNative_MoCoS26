@@ -76,12 +76,12 @@ export default function MapScreen() {
         showsUserLocation       // muestra el punto azul de tu posición
         showsMyLocationButton={false} // ocultamos el botón nativo, usamos el nuestro
       >
-        {/* Capa de imágenes (tiles) de OpenStreetMap — gratis y sin API key */}
+        {/* Tiles de CARTO (datos OSM, sin restricciones de User-Agent, sin API key) */}
         <UrlTile
-          urlTemplate="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-          maximumZ={19}   // nivel de zoom máximo que ofrece OSM
-          flipY={false}   // OSM usa el sistema de coordenadas estándar (no invertido)
-          zIndex={-1}     // se dibuja por debajo de los marcadores
+          urlTemplate="https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png"
+          maximumZ={19}
+          flipY={false}
+          zIndex={-1}
         />
       </MapView>
 
@@ -96,7 +96,7 @@ export default function MapScreen() {
 
       {/* Atribución obligatoria por la licencia de OpenStreetMap (Opcional)*/}
       <View style={[styles.atribucion, { backgroundColor: colors.background + 'CC' }]}>
-        <ThemedText style={styles.textoAtribucion}>© OpenStreetMap contributors</ThemedText>
+        <ThemedText style={styles.textoAtribucion}>© OpenStreetMap contributors · © CARTO</ThemedText>
       </View>
 
     </View>
