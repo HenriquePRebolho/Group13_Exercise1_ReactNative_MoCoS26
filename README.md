@@ -1,50 +1,88 @@
-# Welcome to your Expo app 👋
+# MoCo App — Group 13 (React Native / Expo)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Aplicación móvil desarrollada para la asignatura **Mobile Computing (MoCo)**. El proyecto fue originalmente desarrollado en **Android Studio (Kotlin)** y ha sido **migrado completamente a React Native con Expo Router**, manteniendo toda la funcionalidad y añadiendo nuevas características.
 
-## Get started
+## Tecnologías
 
-1. Install dependencies
+- [Expo SDK 54](https://expo.dev) con [Expo Router](https://expo.dev/router) (enrutado basado en ficheros)
+- React 19 + TypeScript
+- React Native Maps + Expo Location (mapa con GPS)
+- Context API para gestión de estado global
+
+## Pantallas
+
+| Pantalla | Descripción |
+|---|---|
+| **Events** (`index`) | Lista de eventos disponibles con búsqueda y filtrado |
+| **Map** | Mapa interactivo con ubicación GPS y tiles de CARTO |
+| **New Event** | Formulario para crear eventos (nombre, fecha, hora, lugar, descripción, límite de personas, privacidad) |
+| **Friends** | Lista de amigos con búsqueda |
+| **Profile** | Perfil del usuario con eventos y amigos |
+| **Event Detail** | Detalle de un evento con opción de unirse/abandonar |
+| **Friend Detail** | Perfil de un amigo con opción de añadir/eliminar amistad |
+
+## Componentes reutilizables
+
+- `EventCard` — tarjeta visual para eventos
+- `FriendCard` — tarjeta visual para amigos
+- `SearchBar` — barra de búsqueda genérica
+- `Listing` — lista genérica reutilizable
+- `ProfileInfoRow` — fila de información de perfil
+- `ConfirmDialog` — diálogo de confirmación
+
+## Estado global
+
+`context/AppContext.tsx` centraliza todo el estado de la app:
+
+- Lista de eventos y evento seleccionado
+- Lista de amigos y amigo seleccionado
+- Perfil del usuario
+- Acciones: `createEvent`, `joinEvent`, `leaveEvent`, `addFriend`, `removeFriend`
+
+## Estructura del proyecto
+
+```
+app/
+  (tabs)/         # Navegación por pestañas
+    index.tsx     # Events
+    MapScreen.tsx # Mapa
+    NewScreen.tsx # Crear evento
+    FriendsScreen.tsx
+    ProfileScreen.tsx
+  create-event.tsx
+  event-detail.tsx
+  friend-detail.tsx
+components/       # Componentes reutilizables
+context/          # Estado global (AppContext)
+types/            # Modelos TypeScript (Event, User, Profile)
+```
+
+## Instalación y ejecución
+
+1. Instalar dependencias:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Iniciar el servidor de desarrollo:
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+   Desde el terminal podrás abrir la app en:
+   - Dispositivo físico con **Expo Go** (escanea el QR)
+   - Emulador **Android**
+   - Simulador **iOS**
+   - **Navegador web**
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Nota sobre el mapa
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Los tiles del mapa usan `https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png` en lugar de los servidores oficiales de OpenStreetMap porque `UrlTile` de React Native Maps no permite cabeceras HTTP personalizadas (User-Agent), lo que provoca error 403 en OSM.
 
-## Get a fresh project
+La versión web del mapa usa un `<iframe>` con el embed oficial de OpenStreetMap y `navigator.geolocation`.
 
-When you're ready, run:
+## Autores
 
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Grupo 13 — MoCo S26
